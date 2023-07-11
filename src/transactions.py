@@ -13,6 +13,7 @@ class Transaction:
 
 
     def __str__(self):
+        '''преобразует в строку нужного формата'''
         if self.from_w:
             return f'''{self.date.strftime('%d.%m.%Y')} {self.description}
 {self.proceed_from_str(self.from_w)} -> {self.proceed_from_str(self.to_w)}
@@ -25,6 +26,7 @@ class Transaction:
 
     @staticmethod
     def proceed_from_str(string):
+        '''заменяет часть цифр в строке со счетом на звёздочки'''
         if string.split()[0] == 'Счет':
             return f'Счет **{string.split()[-1][-4:]}'
         else:

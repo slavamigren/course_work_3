@@ -21,7 +21,7 @@ def show_last_five(datafile):
 
     final_list = filter(lambda x: x.state == 'EXECUTED', trans_list) # итератор на только состоявшиеся транзакции
 
-    for i in range(5):# выводим пять последних операций
+    for i in range(5):# выводим пять последних состоявшихся транзакций
         print(next(final_list))
         print()
 

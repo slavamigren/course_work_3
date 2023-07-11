@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Transaction:
     def __init__(self, id, date, state, operationAmount, description, from_w, to_w):
         self.id = id
@@ -10,9 +13,14 @@ class Transaction:
 
 
     def __str__(self):
-        return f'''14.10.2018 Перевод организации
-Visa Platinum 7000 79** **** 6361 -> Счет **9638
-82771.72 руб.'''
+        if self.from_w:
+            return f'''{self.date.strftime('%d.%m.%Y')} {self.description}
+{self.proceed_from_str(self.from_w)} -> {self.proceed_from_str(self.to_w)}
+{self.operationAmount['amount']} {self.operationAmount['currency']['name']}'''
+        else:
+            return f'''{self.date.strftime('%d.%m.%Y')} {self.description}
+{self.proceed_from_str(self.to_w)}
+{self.operationAmount['amount']} {self.operationAmount['currency']['name']}'''
 
 
     @staticmethod
@@ -21,24 +29,5 @@ Visa Platinum 7000 79** **** 6361 -> Счет **9638
             return f'Счет **{string.split()[-1][-4:]}'
         else:
             return f'{" ".join(string.split()[:-1])} {string.split()[-1][:4]} {string.split()[-1][5:7]}** **** {string.split()[-1][-4:]}'
-
-
-
-
-
-
-class Transactions:
-    def __init__(self):
-        self.transact_list = []
-
-
-    def add_transaction(self, transaction):
-        if not isinstance(transaction, Transaction):
-            raise ValueError("new adding transaction must be a Transaction type")
-        self.transact_list.append(transaction)
-
-
-    def sort(self) :
-        self.transact_list.sort(key=lambda x: x.date, reverse=True)
 
 

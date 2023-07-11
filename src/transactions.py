@@ -31,5 +31,3 @@ class Transaction:
             return f'Счет **{string.split()[-1][-4:]}'
         else:
             return f'{" ".join(string.split()[:-1])} {string.split()[-1][:4]} {string.split()[-1][5:7]}** **** {string.split()[-1][-4:]}'
-
-
